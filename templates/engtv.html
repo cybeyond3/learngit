@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}影院{% endblock %}
+{% block tvname %}{{ tv.name }}{% endblock %}
+{% block menu %}
+    <ul class="nav navbar-nav">
+        <li class="active"><a href="/">Home</a></li>
+{#        <li><a href="{% url 'engtv-url' 0 %}">战狼2</a></li>#}
+{#        <li><a href="{% url 'engtv-url' 1 %}">王牌保镖</a></li>#}
+{#        <li><a href="{% url 'engtv-url' 2 %}">极盗车神</a></li>#}
+{#        <li><a href="{% url 'engtv-url' 3 %}">赛车总动员3</a></li>#}
+        {% for t in tv_list %}
+            <li>
+                <a href="{% url 'engtv-url' forloop.counter0 %}">{{ t.name }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
+{% block content %}
+    <div class="conatiner">
+        <div id="tvcode" align="center">
+            <iframe height=498 width=510
+                    src='http://player.youku.com/embed/{{ tv.tvcode }}'
+                    frameborder=0'allowfullscreen'>
+            </iframe>
+        </div>
+    </div>
+{% endblock %}

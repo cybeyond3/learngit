@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}爸爸去哪儿{% endblock %}
+{% block tvname %}{{ tv.name }}{% endblock %}
+{% block menu %}
+    <ul class="nav navbar-nav">
+        <li class="active"><a href="/">Home</a></li>
+{#        <li><a href="{% url 'tv-url' 0 %}">第一期</a></li>#}
+{#        <li><a href="{% url 'tv-url' 1 %}">第二期</a></li>#}
+{#        <li><a href="{% url 'tv-url' 2 %}">第三期</a></li>#}
+{#        <li><a href="{% url 'tv-url' 3 %}">第四期</a></li>#}
+{#        <li><a href="{% url 'tv-url' 4 %}">第五期</a></li>#}
+{#        <li><a href="{% url 'tv-url' 5 %}">第六期</a></li>#}
+{#        <li><a href="{% url 'tv-url' 6 %}">第七期</a></li>#}
+{#        <li><a href="{% url 'tv-url' 7 %}">第八期</a></li>#}
+{#        <li><a href="{% url 'tv-url' 8 %}">第九期</a></li>#}
+        {% for t in tv_list %}
+            <li>
+                <a href="{% url 'tv-url' forloop.counter0 %}">{{ t.name }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
+{% block content %}
+    <div class="conatiner">
+        <div id="tvcode" align="center">
+            {% if hour > 18 %}
+            晚安
+            {% elif hour < 10 %}
+            早安
+            {% endif %}
+            <br>
+            <iframe height=498 width=510
+                    src='http://player.youku.com/embed/{{ tv.tvcode }}'
+                    frameborder=0'allowfullscreen'>
+            </iframe>
+        </div>
+    </div>
+{% endblock %}

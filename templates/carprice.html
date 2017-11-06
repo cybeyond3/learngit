@@ -1,0 +1,38 @@
+{% load humanize %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>二手车卖场</title>
+</head>
+<body>
+    <h2>欢迎光临DJ二手车卖场</h2>
+    <table>
+        <tr>
+            {% for m in car_maker%}
+                <td bgcolor="#cfc">
+                    <a href="{% url 'carprice-url' forloop.counter0 %}">{{ m }}</a>
+                </td>
+            {% endfor %}
+        </tr>
+    </table>
+    {% for c in cars %}
+        {% if forloop.first %}
+        <table>
+            <tr><td>车厂</td><td>车款</td><td>车价</td></tr>
+        {% endif %}
+        <tr bgcolor="{% cycle '#eee' '#ccc' %}">
+            <td>{{ maker_name }}</td>
+            <td>{{ c.model }}</td>
+            <td align="right">NT${{ c.price | floatformat:2 | intcomma }}</td>
+        </tr>
+        {% if forloop.last %}
+        </table>
+        {% endif %}
+    {% empty %}
+        <h3>车厂<em>{{ maker_name }}</em>目前无库存车</h3>
+    {% endfor %}
+{#    {% lorem 2 p random %}#}
+{#    上面这行命令的作用是：随机产生无意义的2个段落#}
+</body>
+</html>
